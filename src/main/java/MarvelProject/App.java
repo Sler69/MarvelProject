@@ -5,15 +5,20 @@
 */
 package MarvelProject;
 
+import MarvelProject.DAO.CollaboratorsDAO;
+import com.google.gson.JsonObject;
 import spark.Request;
 import spark.Response;
 
-import java.util.logging.Logger;
+import java.io.IOException;
+import java.net.URISyntaxException;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import static spark.Spark.*;
 
 public class App {
-
+    private static final Logger logger = LogManager.getLogger("HelloWorld");
     public static void main(String[] args) {
         port(8000);
         System.out.println("LOL");
@@ -21,7 +26,7 @@ public class App {
 
     }
 
-    public static String hello(Request req, Response res){
-        return "LOL";
+    public static JsonObject hello(Request req, Response res) throws IOException, URISyntaxException {
+        return CollaboratorsDAO.getCollaborators();
     }
 }
