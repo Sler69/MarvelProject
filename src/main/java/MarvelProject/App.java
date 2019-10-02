@@ -5,7 +5,7 @@
 */
 package MarvelProject;
 
-import MarvelProject.DAO.CollaboratorsDAO;
+import MarvelProject.DAO.CharactersDAO;
 import com.google.gson.JsonObject;
 import spark.Request;
 import spark.Response;
@@ -27,6 +27,6 @@ public class App {
     }
 
     public static JsonObject hello(Request req, Response res) throws IOException, URISyntaxException {
-        return CollaboratorsDAO.getCollaborators();
+        return CharactersDAO.getCollaborators();
     }
 }

@@ -60,6 +60,7 @@ public class MarvelConnection {
         }
         String line = "";
         StringBuffer result = new StringBuffer();
+
         try {
             BufferedReader rd = new BufferedReader(
                     new InputStreamReader(response.getEntity().getContent()));
@@ -68,6 +69,12 @@ public class MarvelConnection {
             }
         } catch (IOException e) {
             e.printStackTrace();
+        }
+        int status =  response.getStatusLine().getStatusCode();
+
+        if(status != 200){
+            logger.warn("There was an error communicating with Marvel Sevice: " + result);
+            return new JsonResponseModel(result.toString(), status);
         }
 
         Gson g = new Gson();

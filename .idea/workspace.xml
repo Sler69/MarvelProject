@@ -2,21 +2,24 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="08d4df30-b698-4bae-99c3-0501b8bb13dd" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_google_code_gson_gson_2_8_5.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__commons_codec_commons_codec_1_11.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__commons_logging_commons_logging_1_2.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__org_apache_httpcomponents_httpclient_4_5_10.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__org_apache_httpcomponents_httpcore_4_4_12.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/MarvelProject/ConnectionUtils/MarvelConnection.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/MarvelProject/DAO/CollaboratorsDAO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/MarvelProject/Models/JsonResponseModel.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__org_mongodb_bson_3_11_0.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__org_mongodb_mongodb_driver_core_3_11_0.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__org_mongodb_mongodb_driver_sync_3_11_0.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/MarvelProject/APIRequests/MarvelAPIRequests.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/MarvelProject/ConnectionUtils/MongoConnection.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/MarvelProject/Controllers/CharacterController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/MarvelProject/DTO/CharacterRawDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/modules/MarvelProject.main.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules/MarvelProject.main.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/modules/MarvelProject.test.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules/MarvelProject.test.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/MarvelProject/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MarvelProject/App.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/MarvelProject/ConnectionUtils/MarvelConnection.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MarvelProject/ConnectionUtils/MarvelConnection.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/MarvelProject/DAO/CollaboratorsDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MarvelProject/DAO/CharactersDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/MarvelProject/Models/JsonResponseModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MarvelProject/Models/JsonResponseModel.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -43,6 +46,10 @@
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="project.structure.last.edited" value="Project" />
+    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.side.proportion" value="0.0" />
+    <property name="settings.editor.selected.configurable" value="reference.settingsdialog.project.gradle" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -56,8 +63,12 @@
       </list>
     </option>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Application.App">
     <configuration name="App" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <envs>
+        <env name="MARVEL_APP_KEY" value="a7d245ddcf8b6ed358c92d3443feedee" />
+        <env name="MARVEL_PRI_KEY" value="1f063d2f92086cbe6af2de7963315198daf1cd97" />
+      </envs>
       <option name="MAIN_CLASS_NAME" value="MarvelProject.App" />
       <module name="MarvelProject.main" />
       <option name="PROGRAM_PARAMETERS" value="--stacktrace" />
@@ -71,8 +82,32 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="MarvelProject [dependencies]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="dependencies" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <GradleScriptDebugEnabled>true</GradleScriptDebugEnabled>
+      <method v="2" />
+    </configuration>
+    <list>
+      <item itemvalue="Application.App" />
+      <item itemvalue="Gradle.MarvelProject [dependencies]" />
+    </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Gradle.MarvelProject [dependencies]" />
         <item itemvalue="Application.App" />
       </list>
     </recent_temporary>
@@ -89,15 +124,6 @@
       <updated>1569820666433</updated>
     </task>
     <servers />
-  </component>
-  <component name="TodoView">
-    <todo-panel id="selected-file">
-      <is-autoscroll-to-source value="true" />
-    </todo-panel>
-    <todo-panel id="all">
-      <are-packages-shown value="true" />
-      <is-autoscroll-to-source value="true" />
-    </todo-panel>
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
@@ -117,8 +143,13 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/MarvelProject/ConnectionUtils/MarvelConnection.java</url>
-          <line>72</line>
+          <line>79</line>
           <option name="timeStamp" value="2" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/MarvelProject/DAO/CharactersDAO.java</url>
+          <line>28</line>
+          <option name="timeStamp" value="5" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

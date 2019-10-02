@@ -7,6 +7,11 @@ public class JsonResponseModel {
     private int code;
     private JsonObject data;
 
+    public JsonResponseModel(String status, int code) {
+        this.status = status;
+        this.code = code;
+    }
+
     public String getStatus() {
         return status;
     }
