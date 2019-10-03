@@ -12,8 +12,19 @@ public class MarvelAPIRequests {
     public static JsonResponseModel getCharactersRequest(String characterNane){
         List<NameValuePair> params = new ArrayList<NameValuePair>();
         params.add(new BasicNameValuePair("name",characterNane));
-        JsonResponseModel responseForCharacter = MarvelConnection
+        return MarvelConnection
                 .generateMarvelRequest("/v1/public/characters",params);
-        return responseForCharacter;
+    }
+
+    public static JsonResponseModel getComicsFromCharacterRequest(int characterId){
+        List<NameValuePair> params = new ArrayList<NameValuePair>();
+        String baseUrl ="/v1/public/characters/" + characterId +"/comics";
+        return MarvelConnection.generateMarvelRequest(baseUrl, params);
+    }
+
+    public static JsonResponseModel getCollaborators(int comicId){
+        List<NameValuePair> params = new ArrayList<NameValuePair>();
+        String baseUrl = "/v1/public/comics/" + comicId + "/creators";
+        return MarvelConnection.generateMarvelRequest(baseUrl, params);
     }
 }

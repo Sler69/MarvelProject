@@ -5,8 +5,10 @@
 */
 package MarvelProject;
 
+import MarvelProject.Controllers.CharacterController;
 import MarvelProject.DAO.CharactersDAO;
 import com.google.gson.JsonObject;
+import org.slf4j.LoggerFactory;
 import spark.Request;
 import spark.Response;
 
@@ -19,14 +21,12 @@ import static spark.Spark.*;
 
 public class App {
     private static final Logger logger = LogManager.getLogger("HelloWorld");
+
     public static void main(String[] args) {
         port(8000);
-        System.out.println("LOL");
-        get("/hello", App::hello);
-
-    }
-
-    public static JsonObject hello(Request req, Response res) throws IOException, URISyntaxException {
-        return CharactersDAO.getCollaborators();
+        get("/marvel/collaborators/:character", CharacterController::getCharacterCollaborators);
+        get("/hello/:name", (request, response) -> {
+            return "Hello: " + request.params(":name");
+        });
     }
 }

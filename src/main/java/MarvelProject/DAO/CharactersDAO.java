@@ -4,6 +4,8 @@ import MarvelProject.APIRequests.MarvelAPIRequests;
 import MarvelProject.ConnectionUtils.MarvelConnection;
 import MarvelProject.ConnectionUtils.MongoConnection;
 import MarvelProject.DTO.CharacterRawDTO;
+import MarvelProject.DTO.CollaboratorRawDTO;
+import MarvelProject.DTO.ComicRawDTO;
 import MarvelProject.Models.JsonResponseModel;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
@@ -15,25 +17,16 @@ import org.apache.http.message.BasicNameValuePair;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
 import org.bson.Document;
 
 public class CharactersDAO {
 
-    public static final JsonObject getCollaborators() {
 
-        JsonResponseModel responseForCharacters = MarvelAPIRequests.getCharactersRequest("Iron Man");
-        JsonObject informationService = responseForCharacters.getData();
-        JsonArray characters = informationService.getAsJsonArray("results");
-        Gson gson = new Gson();
-        Type listType = new TypeToken<List<CharacterRawDTO>>() {}.getType();
-        List<CharacterRawDTO> listCharacters = gson.fromJson(characters.toString(), listType);
-        CharactersDAO.insertCharacters(listCharacters);
-        return responseForCharacters.getData();
-    }
-
-    public static void insertCharacters(List<CharacterRawDTO> listCharacters){
-        MongoCollection characterCollection = MongoConnection.getCollectionCharacters();
+    public static int insertCharacters(List<CharacterRawDTO> listCharacters){
         List<Document> documentsToInsert = new ArrayList<Document>();
         listCharacters.forEach(character -> {
             Document docCharacter = new Document("name", character.getName())
@@ -42,7 +35,36 @@ public class CharactersDAO {
                                         .append("modified", character.getModified());
             documentsToInsert.add(docCharacter);
         });
-        MongoConnection.insertManyCharacters(documentsToInsert);
+        return MongoConnection.insertManyCharacters(documentsToInsert);
+    }
 
+    public static int insertComicsInCharacter(int id, List<ComicRawDTO> listComics){
+        List<Document> comicsToInsert = new ArrayList<Document>();
+        listComics.forEach( comic -> {
+            Document docComic = new Document("id", comic.getId())
+                                    .append("title", comic.getTitle())
+                                    .append("modified",comic.getModified())
+                                    .append("format",comic.getFormat())
+                                    .append("pageCount", comic.getPageCout())
+                                    .append("description", comic.getDescription());
+            comicsToInsert.add(docComic);
+        });
+
+        return MongoConnection.insertArrayIntoCharacter(comicsToInsert, id, "comics");
+    }
+
+    public static int insertCollaboratorsInCharacter(int id, HashMap<Integer, CollaboratorRawDTO> uniqueCollaborators){
+        List<Document> collaboratorsToInsert = new ArrayList<Document>();
+        for (Map.Entry<Integer,CollaboratorRawDTO> entry : uniqueCollaborators.entrySet() ){
+            CollaboratorRawDTO collaborator = entry.getValue();
+            Document mongoCollaborator = new Document("id", collaborator.getId())
+                                            .append("firstName", collaborator.getFirstName())
+                                            .append("lastName",collaborator.getLastName())
+                                            .append("middleName",collaborator.getMiddleName())
+                                            .append("fullName", collaborator.getFullName())
+                                            .append("modified",collaborator.getModified());
+            collaboratorsToInsert.add(mongoCollaborator);
+        }
+        return MongoConnection.insertArrayIntoCharacter(collaboratorsToInsert, id, "collaborators");
     }
 }
