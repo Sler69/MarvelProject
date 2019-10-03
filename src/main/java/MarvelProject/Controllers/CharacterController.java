@@ -10,8 +10,9 @@ import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import spark.Request;
 import spark.Response;
 
@@ -23,7 +24,7 @@ import java.util.List;
 import java.util.Map;
 
 public class CharacterController {
-    private static final Logger logger = LogManager.getLogger("MongoConnection");
+    static Logger logger = LoggerFactory.getLogger(CharacterController.class);
 
     public static JsonObject getCharacterCollaborators(Request request, Response response){
 

@@ -1,21 +1,22 @@
 package MarvelProject.ConnectionUtils;
 
 
+import MarvelProject.Controllers.CharacterController;
 import com.mongodb.WriteConcern;
 import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import com.mongodb.ReadConcern;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+
 import org.bson.Document;
-import org.bson.conversions.Bson;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.List;
 
 public class MongoConnection {
-    private static final Logger logger = LogManager.getLogger("MongoConnection");
+    static Logger logger = LoggerFactory.getLogger(MongoConnection.class);
 
     public static int insertManyCharacters(List<Document> charactersList){
         MongoClient mongoClient =  MongoClients.create();
@@ -27,7 +28,7 @@ public class MongoConnection {
             mongoClient.close();
             return 0;
         } catch (Exception e){
-            logger.error(e);
+            logger.error(e.toString());
         }finally {
             mongoClient.close();
         }
@@ -53,7 +54,7 @@ public class MongoConnection {
             mongoClient.close();
             return 0;
         } catch (Exception e){
-            logger.error(e);
+            logger.error(e.toString());
         }finally {
             mongoClient.close();
         }

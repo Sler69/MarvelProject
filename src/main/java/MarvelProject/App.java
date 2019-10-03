@@ -6,21 +6,17 @@
 package MarvelProject;
 
 import MarvelProject.Controllers.CharacterController;
-import MarvelProject.DAO.CharactersDAO;
-import com.google.gson.JsonObject;
-import org.slf4j.LoggerFactory;
-import spark.Request;
-import spark.Response;
 
-import java.io.IOException;
-import java.net.URISyntaxException;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.io.File;
+import java.net.URL;
 
 import static spark.Spark.*;
 
 public class App {
-    private static final Logger logger = LogManager.getLogger("HelloWorld");
+    static Logger logger = LoggerFactory.getLogger(App.class);
 
     public static void main(String[] args) {
         port(8000);
