@@ -1,6 +1,6 @@
 # Marvel Prject(Albo)
 
-This is a project that uses the marvel API to get information for differnt heroes!
+This is a project that uses the marvel API to get information for different heroes!
 
 ## Getting Started
 
