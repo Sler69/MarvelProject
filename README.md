@@ -7,6 +7,10 @@ This is a project that uses the marvel API to get information for different hero
 To be able to use this project you require to get your own API key from Marvel: https://developer.marvel.com/. Or ask your 
 manager for credentials. 
 
+## Notes
+
+The api is case sensitive so we need to send exact name of character aka Iron Man to the service. In this case just add the param as this: Iron_Man = Iron Man, Black_Panther = Black Panther
+
 ### Prerequisites
 
 What things you need to install the software and how to install them
