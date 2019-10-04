@@ -19,6 +19,8 @@ Java
 ### Logging
 
 For logging we are using log4j therefore you need to specify the logj4 jar you would like to use for the project.
+In this project we compile the simple 4j JAR. https://mvnrepository.com/artifact/org.slf4j/slf4j-simple/1.7.28.
+So to get some logging locally download the Jar and add it in the directory libs.
 
 ## Built With
 * [Spark](http://sparkjava.com/) - Used for Microservice Framework
