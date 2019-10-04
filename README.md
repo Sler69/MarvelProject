@@ -1,4 +1,4 @@
-# Marvel Prject(Albo)
+# Marvel Project(Albo)
 
 This is a project that uses the marvel API to get information for different heroes!
 
