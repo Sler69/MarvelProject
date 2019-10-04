@@ -20,6 +20,13 @@ Mongo
 Gradle
 Java
 ```
+
+Running the project 
+```
+source ./assemble.sh 
+./avengers.sh
+```
+Make sure you substitute the API key and Private key in assemble.sh . 
 ### Logging
 
 For logging we are using log4j therefore you need to specify the logj4 jar you would like to use for the project.
