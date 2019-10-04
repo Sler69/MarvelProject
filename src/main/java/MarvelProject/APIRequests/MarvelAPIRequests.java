@@ -16,8 +16,11 @@ public class MarvelAPIRequests {
                 .generateMarvelRequest("/v1/public/characters",params);
     }
 
-    public static JsonResponseModel getComicsFromCharacterRequest(int characterId){
+    public static JsonResponseModel getComicsFromCharacterRequest(int characterId, Integer offset){
         List<NameValuePair> params = new ArrayList<NameValuePair>();
+        if(offset > 0 ){
+            params.add(new BasicNameValuePair("offset", offset.toString()));
+        }
         String baseUrl ="/v1/public/characters/" + characterId +"/comics";
         return MarvelConnection.generateMarvelRequest(baseUrl, params);
     }

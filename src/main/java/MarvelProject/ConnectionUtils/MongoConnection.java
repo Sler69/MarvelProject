@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MongoConnection {
-    static Logger logger = LoggerFactory.getLogger(MongoConnection.class);
+    private static Logger logger = LoggerFactory.getLogger(MongoConnection.class);
 
     public static Integer insertManyCharacters(List<Document> charactersList){
         MongoClient mongoClient =  MongoClients.create();
@@ -24,6 +24,7 @@ public class MongoConnection {
             characterCollection.insertMany(charactersList);
         } catch (Exception e){
             logger.error(e.toString());
+            return 0;
         }finally {
             mongoClient.close();
         }
@@ -48,6 +49,31 @@ public class MongoConnection {
             characterCollection.updateOne(find,updateOperation);
         } catch (Exception e){
             logger.error(e.toString());
+            return 0;
+        }finally {
+            mongoClient.close();
+        }
+        return 1;
+    }
+
+    public static Integer updateArrayComicsIntoCharacter(List<Document> arrayToInsert, int characterId){
+        MongoClient mongoClient =  MongoClients.create();
+        MongoDatabase database = mongoClient.getDatabase("marvel");
+        MongoCollection<Document> characterCollection = database.getCollection("characters").withReadConcern(ReadConcern.LOCAL)
+                .withWriteConcern(WriteConcern.ACKNOWLEDGED);
+        Document find = (Document)  characterCollection.find(new Document("_id", characterId)).first();
+        Document eachObject =new Document();
+        eachObject.put("$each", arrayToInsert);
+        Document modifiedObject = new Document();
+        modifiedObject.put("$push", new Document().append("comics", eachObject));
+        if(find == null){
+            return 0;
+        }
+        try {
+            characterCollection.updateOne(find,modifiedObject);
+        } catch (Exception e){
+            logger.error(e.toString());
+            return 0;
         }finally {
             mongoClient.close();
         }

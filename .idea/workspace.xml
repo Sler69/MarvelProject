@@ -2,16 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="08d4df30-b698-4bae-99c3-0501b8bb13dd" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/MarvelProject/Controllers/CollaboratorController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/MarvelProject/DTO/CharacterInteractionDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/MarvelProject/DTO/CharacterMongoDTO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/MarvelProject/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MarvelProject/App.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/MarvelProject/APIRequests/MarvelAPIRequests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MarvelProject/APIRequests/MarvelAPIRequests.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/MarvelProject/ConnectionUtils/MarvelConnection.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MarvelProject/ConnectionUtils/MarvelConnection.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/MarvelProject/ConnectionUtils/MongoConnection.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MarvelProject/ConnectionUtils/MongoConnection.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/MarvelProject/Controllers/CharacterController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MarvelProject/Controllers/CharacterController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/MarvelProject/Controllers/CollaboratorController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MarvelProject/Controllers/CollaboratorController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/MarvelProject/DAO/CharactersDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MarvelProject/DAO/CharactersDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/MarvelProject/DTO/ComicRawDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MarvelProject/DTO/ComicRawDTO.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />

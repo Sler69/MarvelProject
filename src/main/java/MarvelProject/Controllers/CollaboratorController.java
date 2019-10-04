@@ -3,6 +3,7 @@ package MarvelProject.Controllers;
 import MarvelProject.APIRequests.MarvelAPIRequests;
 import MarvelProject.ConnectionUtils.MongoConnection;
 import MarvelProject.DAO.CharactersDAO;
+import MarvelProject.DTO.CharacterMongoDTO;
 import MarvelProject.DTO.CharacterRawDTO;
 import MarvelProject.DTO.CollaboratorRawDTO;
 import MarvelProject.DTO.ComicRawDTO;
@@ -37,10 +38,25 @@ public class CollaboratorController {
             logger.info("Didn't find any character on the database, hydrating character from Marvel Api");
            return hydratingDatabaseWithCharacter(characterName);
         }
-
+        Gson gson = new Gson();
         String json = characterMongoData.toJson().toString();
         JsonObject characterData = new JsonParser().parse(json).getAsJsonObject();
         JsonObject outputVariable = new JsonObject();
+        CharacterMongoDTO character = gson.fromJson(json, CharacterMongoDTO.class);
+
+        logger.info("Found the character adding more comics, using offset");
+
+        JsonResponseModel comicsInfo = MarvelAPIRequests.getComicsFromCharacterRequest(character.get_id(), character.getComics().size());
+        JsonObject comicsInfoService = comicsInfo.getData();
+        JsonArray comics = comicsInfoService.getAsJsonArray("results");
+        Type comicsType = new TypeToken<List<ComicRawDTO>>() {}.getType();
+        List<ComicRawDTO> listComics = gson.fromJson(comics.toString(), comicsType);
+
+        Integer statusInsertComics = CharactersDAO.updateComicsInCharacter(character.get_id(), listComics);
+        if(statusInsertComics == 0){
+            logger.warn("There was an error when inserting the new comics for character: " + character.getName());
+        }
+
         JsonObject collaboratorPerCharacter = new JsonObject();
         collaboratorPerCharacter.add("collaborators", characterData.get("collaborators"));
         collaboratorPerCharacter.add("last_sync", characterData.get("last_sync"));
@@ -78,7 +94,7 @@ public class CollaboratorController {
         listCharacters.forEach(character ->{
             ArrayList<Integer> comicIds = new ArrayList<Integer>();
             int characterId = character.getId();
-            JsonResponseModel comicsInfo = MarvelAPIRequests.getComicsFromCharacterRequest(character.getId());
+            JsonResponseModel comicsInfo = MarvelAPIRequests.getComicsFromCharacterRequest(character.getId(), 0);
             JsonObject comicsInfoService = comicsInfo.getData();
             JsonArray comics = comicsInfoService.getAsJsonArray("results");
 
@@ -142,6 +158,5 @@ public class CollaboratorController {
 
         return outputObject;
     }
-
 
 }

@@ -27,18 +27,15 @@ public class CharactersDAO {
     }
 
     public static Integer insertComicsInCharacter(int id, List<ComicRawDTO> listComics){
-        List<Document> comicsToInsert = new ArrayList<Document>();
-        listComics.forEach( comic -> {
-            Document docComic = new Document("id", comic.getId())
-                                    .append("title", comic.getTitle())
-                                    .append("modified",comic.getModified())
-                                    .append("format",comic.getFormat())
-                                    .append("pageCount", comic.getPageCount())
-                                    .append("description", comic.getDescription());
-            comicsToInsert.add(docComic);
-        });
+        List<Document> comicsDocuments = generateComicDocuments(listComics);
 
-        return MongoConnection.insertArrayIntoCharacter(comicsToInsert, id, "comics");
+        return MongoConnection.insertArrayIntoCharacter(comicsDocuments, id, "comics");
+    }
+
+
+    public static Integer updateComicsInCharacter(int id,List<ComicRawDTO> listComics ){
+        List<Document> comicsDocuments = generateComicDocuments(listComics);
+        return MongoConnection.updateArrayComicsIntoCharacter(comicsDocuments,id);
     }
 
     public static Integer insertCollaboratorsInCharacter(int id, HashMap<Integer, CollaboratorRawDTO> uniqueCollaborators){
@@ -54,6 +51,20 @@ public class CharactersDAO {
             collaboratorsToInsert.add(mongoCollaborator);
         }
         return MongoConnection.insertArrayIntoCharacter(collaboratorsToInsert, id, "collaborators");
+    }
+
+    private static List<Document> generateComicDocuments(List<ComicRawDTO> listComics){
+        List<Document> comicsToInsert = new ArrayList<Document>();
+        listComics.forEach( comic -> {
+            Document docComic = new Document("id", comic.getId())
+                    .append("title", comic.getTitle())
+                    .append("modified",comic.getModified())
+                    .append("format",comic.getFormat())
+                    .append("pageCount", comic.getPageCount())
+                    .append("description", comic.getDescription());
+            comicsToInsert.add(docComic);
+        });
+        return comicsToInsert;
     }
 
 }

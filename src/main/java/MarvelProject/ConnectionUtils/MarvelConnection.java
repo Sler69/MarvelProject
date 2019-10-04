@@ -27,7 +27,7 @@ public class MarvelConnection {
     private static final String URL_MARVEL = "http://gateway.marvel.com";
     private static final String API_KEY = System.getenv("MARVEL_APP_KEY");
     private static final String HASH_KEY = System.getenv("MARVEL_PRI_KEY");
-    static Logger logger = LoggerFactory.getLogger(MarvelConnection.class);
+    private static Logger logger = LoggerFactory.getLogger(MarvelConnection.class);
 
     public static JsonResponseModel generateMarvelRequest(String urlEndpoint, List<NameValuePair> params) {
 
