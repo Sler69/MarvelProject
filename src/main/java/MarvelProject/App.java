@@ -6,12 +6,10 @@
 package MarvelProject;
 
 import MarvelProject.Controllers.CharacterController;
+import MarvelProject.Controllers.CollaboratorController;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.io.File;
-import java.net.URL;
 
 import static spark.Spark.*;
 
@@ -20,9 +18,14 @@ public class App {
 
     public static void main(String[] args) {
         port(8000);
-        get("/marvel/collaborators/:character", CharacterController::getCharacterCollaborators);
-        get("/hello/:name", (request, response) -> {
-            return "Hello: " + request.params(":name");
+        path("/marvel", () -> {
+            before("/*", (q, a) -> logger.info("Received api call for marvel"));
+            path("/collaborators", () -> {
+                get("/:character", CollaboratorController::getCharacterCollaborators);
+            });
+            path("/characters", () -> {
+                get("/:character", CharacterController::getCharacterInteraction);
+            });
         });
     }
 }

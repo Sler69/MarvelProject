@@ -1,6 +1,5 @@
 package MarvelProject.ConnectionUtils;
 
-import MarvelProject.Controllers.CharacterController;
 import MarvelProject.Models.JsonResponseModel;
 import com.google.gson.Gson;
 import org.apache.commons.codec.digest.DigestUtils;

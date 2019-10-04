@@ -1,32 +1,27 @@
 package MarvelProject.ConnectionUtils;
 
 
-import MarvelProject.Controllers.CharacterController;
 import com.mongodb.WriteConcern;
-import com.mongodb.client.MongoClients;
-import com.mongodb.client.MongoClient;
-import com.mongodb.client.MongoCollection;
-import com.mongodb.client.MongoDatabase;
+import com.mongodb.client.*;
 import com.mongodb.ReadConcern;
 
 import org.bson.Document;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class MongoConnection {
     static Logger logger = LoggerFactory.getLogger(MongoConnection.class);
 
-    public static int insertManyCharacters(List<Document> charactersList){
+    public static Integer insertManyCharacters(List<Document> charactersList){
         MongoClient mongoClient =  MongoClients.create();
         MongoDatabase database = mongoClient.getDatabase("marvel");
         MongoCollection<Document> characterCollection = database.getCollection("characters").withReadConcern(ReadConcern.LOCAL)
                                                       .withWriteConcern(WriteConcern.ACKNOWLEDGED);
         try {
             characterCollection.insertMany(charactersList);
-            mongoClient.close();
-            return 0;
         } catch (Exception e){
             logger.error(e.toString());
         }finally {
@@ -35,7 +30,7 @@ public class MongoConnection {
         return 1;
     }
 
-    public static int insertArrayIntoCharacter(List<Document> arrayToInsert, int characterId, String key){
+    public static Integer insertArrayIntoCharacter(List<Document> arrayToInsert, int characterId, String key){
         MongoClient mongoClient =  MongoClients.create();
         MongoDatabase database = mongoClient.getDatabase("marvel");
         MongoCollection<Document> characterCollection = database.getCollection("characters").withReadConcern(ReadConcern.LOCAL)
@@ -51,14 +46,36 @@ public class MongoConnection {
         characterCollection.updateOne(find,updateOperation);
         try {
             characterCollection.updateOne(find,updateOperation);
-            mongoClient.close();
-            return 0;
         } catch (Exception e){
             logger.error(e.toString());
         }finally {
             mongoClient.close();
         }
         return 1;
+    }
+
+    public static Document getCharacter(String name){
+        Document character;
+        MongoClient mongoClient =  MongoClients.create();
+        MongoDatabase database = mongoClient.getDatabase("marvel");
+        MongoCollection<Document> characterCollection = database.getCollection("characters").withReadConcern(ReadConcern.LOCAL)
+                .withWriteConcern(WriteConcern.ACKNOWLEDGED);
+        character = (Document)  characterCollection.find(new Document("name", name)).first();
+        if(character == null){
+            logger.warn("There was no character with the name: " + name);
+        }
+        mongoClient.close();
+        return character;
+    }
+
+    public static MongoCursor<Document> getCharactersInteracting(List<Integer> comicsIds ){
+        MongoClient mongoClient =  MongoClients.create();
+        MongoDatabase database = mongoClient.getDatabase("marvel");
+        MongoCollection<Document> characterCollection = database.getCollection("characters").withReadConcern(ReadConcern.LOCAL)
+                .withWriteConcern(WriteConcern.ACKNOWLEDGED);
+        Document query = new Document("comics.id", new Document("$in", comicsIds));
+
+        return characterCollection.find(query).iterator();
     }
 
 }

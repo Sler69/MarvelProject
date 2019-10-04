@@ -6,7 +6,7 @@ public class ComicRawDTO {
     private String description;
     private String modified;
     private String format;
-    private int pageCout;
+    private int pageCount;
 
     public int getId() {
         return id;
@@ -48,11 +48,11 @@ public class ComicRawDTO {
         this.format = format;
     }
 
-    public int getPageCout() {
-        return pageCout;
+    public int getPageCount() {
+        return pageCount;
     }
 
-    public void setPageCout(int pageCout) {
-        this.pageCout = pageCout;
+    public void setPageCount(int pageCount) {
+        this.pageCount = pageCount;
     }
 }
